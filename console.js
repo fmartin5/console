@@ -255,12 +255,10 @@
 	 * @todo Use the `options` argument.
 	 */
 	console.dir = function dir(arg, options) {
-		if(Object(arg) !== arg) {
-			const s = String(arg);
-			_.writeln("dir", s);
-			return;
+		if(Object(arg) === arg) {
+			_.writeln("dir", _.formatObject(arg));
 		}
-		_.writeln("dir", _.formatObject(arg, options));
+		_.writeln("dir", _.defaultStringifier(arg));
 	};
 	
 	
@@ -272,6 +270,7 @@
 		const list = [];
 		for(const arg of _.slice(arguments)) {
 			if(_.isNode(arg)) list[list.length] = _.formatNode(arg);
+			else if(Object(arg) === arg) list[list.length] = _.formatObject(arg);
 			else list[list.length] = _.defaultStringifier(arg);
 		}
 		_.writeln("dirxml", list.join(" "));
