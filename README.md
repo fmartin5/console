@@ -1,10 +1,18 @@
 # console.js
+
 Implementation of the console namespace for the Nashorn engine.
+
+## Requirements
+
+Nashorn from JDK 9+ with ES6 support enabled (jjs --language=es6).
+
 
 ## Usage
 
 ```js
 jjs> load("console.js");
+jjs> console.log("Hello, %s!", "world")
+Hello, world!
 jjs> console.dir(console);
 [object Object] {
  "config": [object Object],
@@ -27,8 +35,29 @@ jjs> console.dir(console);
  "table": [object Function(0)],
  "warn": [object Function(2)]
 }
-jjs>
 ```
+
+## Configuration
+
+The non-standard `console.config` object is a plain object specifying options for visual display.
+
+```js
+jjs> console.dir(console.config)
+[object Object] {
+ "indent": " | ",
+ "showMilliseconds": false,
+ "showMessageType": false,
+ "showTimeStamp": false,
+ "useColors": false,
+ "colorsByLogLevel": [object Object]
+}
+```
+- "indent" - a string to be used to indent groups produced by `console.group()`.
+- "showMilliseconds" - a boolean indicating whether to display milliseconds in timestamps.
+- "showMessageType" - a boolean indicating whether to display which console method was called.
+- "showTimeStamp" - a boolean indicating whether to display timestamps.
+- "useColors" - a boolean indicating whether to use colors to style messages differently according to their severity. Not implemented yet.
+- "colorsByLogLevel" - a plain object. Not implemented yet.
 
 ## Testing
 
