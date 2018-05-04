@@ -273,6 +273,7 @@
 	console.dir = function dir(arg, options) {
 		if(Object(arg) === arg) {
 			_.writeln("dir", _.formatObject(arg));
+			return;
 		}
 		_.writeln("dir", _.defaultStringifier(arg));
 	};
