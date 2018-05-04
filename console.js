@@ -176,6 +176,14 @@
 		System.out.println(s);
 	};
 	
+	_.printLineToStdErr = function (s) {
+		System.err.println(s);
+	};
+	
+	_.printLineToStdOut = function (s) {
+		System.out.println(s);
+	};
+	
 	
 	_.repeat = (s, n) => new Array(n + 1).join(s);
 	_.slice = Function.prototype.call.bind(Array.prototype.slice);
@@ -195,7 +203,15 @@
 		const indent = (this.indentLevel > 0
 			? _.repeat(console.config.indent, this.indentLevel)
 			: "");
-		_.println(prefix + indent + msg);
+		switch(msgType) {
+			case "assert": case "error": case "warn": {
+				_.printLineToStdErr(prefix + indent + msg);
+				break;
+			}
+			default: {
+				_.printLineToStdOut(prefix + indent + msg);
+			}
+		}
 	};
 	
 	
