@@ -177,7 +177,7 @@
 	};
 	
 	
-	_.repeat = function (s, n) { return new Array(n + 1).join(s); };
+	_.repeat = (s, n) => new Array(n + 1).join(s);
 	_.slice = Function.prototype.call.bind(Array.prototype.slice);
 	_.toString = Function.prototype.call.bind(Object.prototype.toString);
 	
